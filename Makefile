@@ -20,6 +20,14 @@ create-project:
 	docker compose exec app chmod -R 777 storage bootstrap/cache
 	@make fresh
 
+composer-update: 
+	@make build
+	# @make up
+	docker compose exec app composer update
+	docker compose exec app php artisan session:table
+	docker compose exec app php artisan migrate
+	@make fresh
+
 grant-permission:
 	docker compose exec app chmod -R 777 storage bootstrap/cache
 build:
@@ -94,4 +102,8 @@ pint-test:
 	docker compose exec app ./src/vendor/bin/pint --verbose --test
 
 artisan-serve:
+	docker compose exec app php artisan config:clear
+	docker compose exec app php artisan cache:clear
+	docker compose exec app php artisan view:clear
+	docker compose exec app php artisan route:clear
 	docker compose exec app php artisan serve
