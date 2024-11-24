@@ -89,9 +89,9 @@ ide-helper:
 	docker compose exec app php artisan ide-helper:meta
 	docker compose exec app php artisan ide-helper:models --write --reset
 pint:
-	docker compose exec app ./vendor/bin/pint --verbose
+	docker compose exec app ./src/vendor/bin/pint --verbose
 pint-test:
-	docker compose exec app ./vendor/bin/pint --verbose --test
+	docker compose exec app ./src/vendor/bin/pint --verbose --test
 
 artisan-serve:
 	docker compose exec app php artisan serve
