@@ -94,11 +94,5 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://github.com/M-Hidayatullah" target="_blank">
-          <i class="icon-paper menu-icon"></i>
-          <span class="menu-title">Author</span>
-        </a>
-      </li>
     </ul>
   </nav>
