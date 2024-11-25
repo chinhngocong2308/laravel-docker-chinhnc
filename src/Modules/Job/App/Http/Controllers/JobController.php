@@ -16,7 +16,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::with('company')->get();
+        $jobs = Job::all();
         return view('job::index', compact('jobs'));
     }
 
@@ -43,7 +43,10 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        return view('job::show');
+        $job = Job::findOrFail($id);
+        $companies = Company::all();
+
+        return view('job::show', compact('job', 'companies'));
     }
 
     /**
@@ -51,15 +54,20 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        return view('job::edit');
+        $job = Job::findOrFail($id);
+        $companies = Company::all();
+        return view('job::edit', compact('job', 'companies'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        //
+        $job = Job::findOrFail($id);
+        $job->update($request->all());
+        return redirect()->route('job.index');
     }
 
     /**
@@ -67,6 +75,8 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $job = Job::findOrFail($id);
+        $job->delete();
+        return redirect()->route('job.index');
     }
 }

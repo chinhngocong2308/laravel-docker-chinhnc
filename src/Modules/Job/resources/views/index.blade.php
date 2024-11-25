@@ -1,10 +1,188 @@
-@extends('job::layouts.master')
+@extends('layouts.company.company-job')
+@section('title', 'Company Job List')
 
-@section('content')
-    <h1>Job List</h1>
-    <ul>
-        @foreach($jobs as $job)
-            <li>{{ $job->job_title }} at {{ $job->company->company_name }}</li>
-        @endforeach
-    </ul>
+@push('style')
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+@endpush
+
+@section('main')
+
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <h1>Company</h1>
+            </div>
+
+            <div class="section-body">
+                <h2 class="section-title">List</h2>
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Simple Table</h4>
+                                <label for="page-length-select">Hiển thị</label>
+                                <select id="page-length-select" class="form-control d-inline-block" style="width: auto;">
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+
+
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="product_table" class="table-bordered table-md table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Company Name</th>
+                                                <th>Job Title</th>
+                                                <th>Job Location</th>
+                                                <th>Job Type</th>
+                                                <th>Employment Type</th>
+                                                <th>Open Date</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($jobs as $job)
+                                                <tr>
+                                                    <td>{{ $job->id }} </td>
+                                                    <td>{{ $job->company->company_name }}</td>
+                                                    <td>{{ $job->job_title }}</td>
+                                                    <td>{{ $job->job_location }}</td>
+                                                    <td>{{ $job->job_type }}</td>
+                                                    <td>{{ $job->employment_type }}</td>
+                                                    <td>{{ $job->open_date }}</td>
+                                                    <td>
+                                                        <a href="{{ route('job.show', $job->id) }}"
+                                                            class="btn btn-secondary">View</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('job.edit', $job->id) }}"
+                                                            class="btn btn-secondary">Edit</a>
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{ route('job.destroy', $job->id) }}" method="POST"
+                                                            style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-secondary" type="submit">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <nav class="d-inline-block">
+                                    <ul class="pagination mb-0" id="custom-pagination">
+                                        <li class="page-item disabled" id="prev-page">
+                                            <a class="page-link" href="#" tabindex="-1"><i
+                                                    class="fas fa-chevron-left"></i></a>
+                                        </li>
+                                        <li class="page-item active" data-page="1"><a class="page-link" href="#">1
+                                                <span class="sr-only">(current)</span></a></li>
+                                        <li class="page-item" data-page="2"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item" data-page="3"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item" id="next-page">
+                                            <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+    </div>
+
 @endsection
+
+@push('scripts')
+    <!-- JS Libraies -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#product_table').DataTable({
+                "paging": true,
+                "info": false,
+                "searching": true,
+                "ordering": true,
+                "pageLength": 3,
+                "dom": 'rt<"dataTable-pagination"p>',
+            });
+
+            $('.dataTable-pagination').hide();
+
+            function updateCustomPagination() {
+                var info = table.page.info();
+                $('#custom-pagination li.page-item:not(#prev-page, #next-page)').remove();
+                for (var i = 1; i <= info.pages; i++) {
+                    var activeClass = (i === info.page + 1) ? 'active' : '';
+                    $('<li class="page-item ' + activeClass + '" data-page="' + (i - 1) +
+                            '"><a class="page-link" href="#">' + i + '</a></li>')
+                        .insertBefore('#next-page');
+                }
+
+                if (info.page === 0) {
+                    $('#prev-page').addClass('disabled');
+                } else {
+                    $('#prev-page').removeClass('disabled');
+                }
+
+                if (info.page === info.pages - 1) {
+                    $('#next-page').addClass('disabled');
+                } else {
+                    $('#next-page').removeClass('disabled');
+                }
+            }
+
+            updateCustomPagination();
+
+            $('#custom-pagination').on('click', 'li.page-item:not(#prev-page, #next-page)', function(e) {
+                e.preventDefault();
+                var pageNumber = $(this).data('page');
+                table.page(pageNumber).draw('page');
+                updateCustomPagination();
+            });
+
+            $('#prev-page').click(function(e) {
+                e.preventDefault();
+                if (!$(this).hasClass('disabled')) {
+                    table.page('previous').draw('page');
+                    updateCustomPagination();
+                }
+            });
+
+            $('#next-page').click(function(e) {
+                e.preventDefault();
+                if (!$(this).hasClass('disabled')) {
+                    table.page('next').draw('page');
+                    updateCustomPagination();
+                }
+            });
+
+            table.on('draw', function() {
+                updateCustomPagination();
+            });
+
+            $('#page-length-select').on('change', function() {
+                var newPageLength = $(this).val();
+                table.page.len(newPageLength).draw();
+                updateCustomPagination();
+            });
+        });
+    </script>
+    <!-- Page Specific JS File -->
+@endpush

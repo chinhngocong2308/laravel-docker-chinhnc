@@ -11,11 +11,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Create Company</h1>
+                <h1>Edit Company</h1>
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">New</h2>
+                <h2 class="section-title">Edit</h2>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">

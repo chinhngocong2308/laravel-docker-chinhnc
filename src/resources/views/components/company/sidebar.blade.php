@@ -16,16 +16,31 @@
 
             <li class="{{ Request::is('company-jobs') ? 'active' : '' }}">
                 <a href="#"
-                    class="nav-link has-dropdown"><i class="far fa-building"></i> <span>Company</span></a>
+                    class="nav-link has-dropdown"><i class="far fa-building"></i> <span>Companies</span></a>
 
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('bootstrap-alert') ? 'active' : '' }}">
+                        <a class="nav-link"
+                        href="{{ route('company.index') }}">List</a>
                         <a class="nav-link"
                             href="{{ route('company.create') }}">Create</a>
                     </li>
                 </ul>
             </li>
 
+            <li class="{{ Request::is('admin-jobs') ? 'active' : '' }}">
+                <a href="#"
+                    class="nav-link has-dropdown"><i class="fas fa-handshake"></i> <span>Jobs</span></a>
+
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('bootstrap-alert') ? 'active' : '' }}">
+                        <a class="nav-link"
+                        href="{{ route('job.index') }}">List</a>
+                        <a class="nav-link"
+                            href="{{ route('job.create') }}">Create</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
     </aside>

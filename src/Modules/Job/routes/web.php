@@ -17,3 +17,13 @@ use Modules\Job\App\Http\Controllers\JobController;
 Route::group([], function () {
     Route::resource('job', JobController::class)->names('job');
 });
+
+Route::group(['prefix' => 'admin-jobs'], function() {
+    Route::get('/', [JobController::class, 'index'])->name('job.index');
+    Route::get('/create', [JobController::class, 'create'])->name('job.create');
+    Route::post('/', [JobController::class, 'store'])->name('job.store');
+    Route::get('/{id}', [JobController::class, 'show'])->name('job.show');
+    Route::get('/{id}/edit', [JobController::class, 'edit'])->name('job.edit');
+    Route::put('/{id}', [JobController::class, 'update'])->name('job.update');
+    Route::delete('/{id}', [JobController::class, 'destroy'])->name('job.destroy');
+});
