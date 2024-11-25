@@ -17,3 +17,22 @@ use Modules\Company\App\Http\Controllers\CompanyController;
 Route::group([], function () {
     Route::resource('company', CompanyController::class)->names('company');
 });
+
+
+Route::prefix('company-jobs')->group(function() {
+    Route::get('/', [
+        'as' => 'company.jobs',
+        'uses' => 'CompanyController@index',
+    ]);
+
+});
+
+Route::group(['prefix' => 'admin-company'], function() {
+    Route::get('/', [CompanyController::class, 'index'])->name('company.index');
+    Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
+    Route::post('/', [CompanyController::class, 'store'])->name('company.store');
+    Route::get('/{id}', [CompanyController::class, 'show'])->name('company.show');
+    Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+    Route::put('/{id}', [CompanyController::class, 'update'])->name('company.update');
+    Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
+});

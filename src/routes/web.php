@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/test-task', function () {
+    return view('custom_test_task', ['type_menu' => 'modules']);
+});
+
 Route::redirect('/template', '/dashboard-general-dashboard');
 
 // Dashboard

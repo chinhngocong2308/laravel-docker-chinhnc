@@ -9,7 +9,6 @@ install:
 	docker compose exec app php artisan key:generate
 	docker compose exec app php artisan storage:link
 	docker compose exec app chmod -R 777 storage bootstrap/cache
-	docker compose exec app php artisan session:table
 	@make fresh
 create-project:
 	mkdir src
@@ -25,7 +24,6 @@ composer-update:
 	@make build
 	# @make up
 	docker compose exec app composer update
-	docker compose exec app php artisan session:table
 	docker compose exec app php artisan migrate
 	@make fresh
 

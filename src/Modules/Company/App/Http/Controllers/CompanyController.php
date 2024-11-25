@@ -24,7 +24,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company::create');
+        $type_menu = 'dashboard';
+        return view('company::create', compact('type_menu'));
     }
 
     /**
@@ -40,7 +41,8 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        return view('company::show');
+        $company = Company::findOrFail($id);
+        return view('company::show', compact('company'));
     }
 
     /**
@@ -48,7 +50,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        return view('company::edit');
+        $company = Company::findOrFail($id);
+        return view('company::edit', compact('company'));
     }
 
     /**
@@ -56,7 +59,9 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        //
+        $company = Company::findOrFail($id);
+        $company->update($request->all());
+        return redirect()->route('company.index');
     }
 
     /**
@@ -64,6 +69,8 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $company = Company::findOrFail($id);
+        $company->delete();
+        return redirect()->route('company.index');
     }
 }
