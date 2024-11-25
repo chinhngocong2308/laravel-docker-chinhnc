@@ -1,5 +1,5 @@
 @extends('layouts.company.company-job')
-@section('title', 'Company Job List')
+@section('title', 'Job')
 
 @push('style')
     <!-- CSS Libraries -->

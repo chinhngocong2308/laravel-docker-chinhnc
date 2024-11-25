@@ -43,7 +43,10 @@ class CClassContactController extends Controller
      */
     public function show($id)
     {
-        return view('cclasscontact::show');
+        $companies = Company::all();
+
+        $contact = CClassContact::with('company')->findOrFail($id);
+        return view('cclasscontact::show', compact('contact', 'companies'));
     }
 
     /**
@@ -51,7 +54,9 @@ class CClassContactController extends Controller
      */
     public function edit($id)
     {
-        return view('cclasscontact::edit');
+        $contact = CClassContact::findOrFail($id);
+        $companies = Company::all();
+        return view('cclasscontact::edit', compact('contact', 'companies'));
     }
 
     /**
@@ -59,7 +64,9 @@ class CClassContactController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        //
+        $contact = CClassContact::findOrFail($id);
+        $contact->update($request->all());
+        return redirect()->route('cclasscontact.index');
     }
 
     /**
@@ -67,6 +74,8 @@ class CClassContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contact = CClassContact::findOrFail($id);
+        $contact->delete();
+        return redirect()->route('cclasscontact.index');
     }
 }

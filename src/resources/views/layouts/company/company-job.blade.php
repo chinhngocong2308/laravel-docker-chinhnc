@@ -45,7 +45,7 @@
     <div id="app">
         <div class="main-wrapper">
             <!-- Header -->
-            {{-- @include('components.header') --}}
+            @include('components.header')
 
             <!-- Sidebar -->
             @include('components.company.sidebar')

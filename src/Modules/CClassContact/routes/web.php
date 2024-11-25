@@ -17,3 +17,13 @@ use Modules\CClassContact\App\Http\Controllers\CClassContactController;
 Route::group([], function () {
     Route::resource('cclasscontact', CClassContactController::class)->names('cclasscontact');
 });
+
+Route::group(['prefix' => 'admin-cclasscontact'], function() {
+    Route::get('/', [CClassContactController::class, 'index'])->name('cclasscontact.index');
+    Route::get('/create', [CClassContactController::class, 'create'])->name('cclasscontact.create');
+    Route::post('/', [CClassContactController::class, 'store'])->name('cclasscontact.store');
+    Route::get('/{id}', [CClassContactController::class, 'show'])->name('cclasscontact.show');
+    Route::get('/{id}/edit', [CClassContactController::class, 'edit'])->name('cclasscontact.edit');
+    Route::put('/{id}', [CClassContactController::class, 'update'])->name('cclasscontact.update');
+    Route::delete('/{id}', [CClassContactController::class, 'destroy'])->name('cclasscontact.destroy');
+});

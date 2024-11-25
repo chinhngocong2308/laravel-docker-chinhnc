@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="#">Stisla</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">St</a>
@@ -38,6 +38,19 @@
                         href="{{ route('job.index') }}">List</a>
                         <a class="nav-link"
                             href="{{ route('job.create') }}">Create</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="{{ Request::is('admin-cclasscontact') ? 'active' : '' }}">
+                <a href="#"
+                    class="nav-link has-dropdown"><i class="fas fa-user-tie"></i> <span>C-Class</span></a>
+
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('bootstrap-alert') ? 'active' : '' }}">
+                        <a class="nav-link"
+                        href="{{ route('cclasscontact.index') }}">List</a>
+                        <a class="nav-link"
+                            href="{{ route('cclasscontact.create') }}">Create</a>
                     </li>
                 </ul>
             </li>

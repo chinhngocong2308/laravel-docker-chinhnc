@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('c_class_contacts', function (Blueprint $table) {
-            $table->id('contact_id');
+            $table->id();
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             $table->string('fullname');
             $table->set('position', ['CEO', 'CTO', 'CFO']);

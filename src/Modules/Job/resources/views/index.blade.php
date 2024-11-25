@@ -1,17 +1,20 @@
 @extends('layouts.company.company-job')
-@section('title', 'Company Job List')
+@section('title', 'Job')
 
 @push('style')
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+
 @endpush
 
 @section('main')
 
     <div class="main-content">
         <section class="section">
-            <div class="section-header">
-                <h1>Company</h1>
+            <div class="section-header" style="display:flex;justify-content: space-between;}">
+                <h1>Jobs</h1>
+                <a href="{{ route('job.create') }}" class="btn btn-primary">Add new</a>
             </div>
 
             <div class="section-body">
@@ -20,10 +23,8 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Simple Table</h4>
-                                <label for="page-length-select">Hiển thị</label>
-                                <select id="page-length-select" class="form-control d-inline-block" style="width: auto;">
-                                    <option value="3">3</option>
+                                <select class="form-control selectric" id="page-length-select" class="form-control d-inline-block" style="width: auto;">
+                                    <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
@@ -111,7 +112,9 @@
 
 @push('scripts')
     <!-- JS Libraies -->
+    <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- Page Specific JS File -->
     <script>
         $(document).ready(function() {
             var table = $('#product_table').DataTable({
@@ -119,7 +122,7 @@
                 "info": false,
                 "searching": true,
                 "ordering": true,
-                "pageLength": 3,
+                "pageLength": 5,
                 "dom": 'rt<"dataTable-pagination"p>',
             });
 
@@ -128,20 +131,20 @@
             function updateCustomPagination() {
                 var info = table.page.info();
                 $('#custom-pagination li.page-item:not(#prev-page, #next-page)').remove();
-                for (var i = 1; i <= info.pages; i++) {
-                    var activeClass = (i === info.page + 1) ? 'active' : '';
+                for (var i = 1; i <= info?.pages; i++) {
+                    var activeClass = (i === info?.page + 1) ? 'active' : '';
                     $('<li class="page-item ' + activeClass + '" data-page="' + (i - 1) +
                             '"><a class="page-link" href="#">' + i + '</a></li>')
                         .insertBefore('#next-page');
                 }
 
-                if (info.page === 0) {
+                if (info?.page === 0) {
                     $('#prev-page').addClass('disabled');
                 } else {
                     $('#prev-page').removeClass('disabled');
                 }
 
-                if (info.page === info.pages - 1) {
+                if (info?.page === info?.pages - 1) {
                     $('#next-page').addClass('disabled');
                 } else {
                     $('#next-page').removeClass('disabled');
@@ -184,5 +187,4 @@
             });
         });
     </script>
-    <!-- Page Specific JS File -->
 @endpush
