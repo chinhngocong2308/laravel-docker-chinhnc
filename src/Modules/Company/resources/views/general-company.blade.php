@@ -15,7 +15,7 @@
                     <div class="col-12 col-md-9 col-lg-9">
                         <div class="card">
                             <div class="card-body">
-                                <ul id="company-list">
+                                <ul style="padding-left: 0">
                                     @foreach ($companies as $company)
                                         <li class="media company-item" data-id="{{ $company->id }}">
                                             <img class="mr-3" src="{{ resize($company->logo_image, 50, 50, 0) }}"
@@ -41,10 +41,14 @@
                                                 @endif
                                                 @if ($company->cclasscontact()->count() > 0)
                                                     <div class="badges">
-                                                        <strong>Contact:</strong>
                                                         @foreach ($company->cclasscontact as $contact)
-                                                            <a href="{{ $contact->contact_link }}"><span
-                                                                    class="badge badge-primary">{{ $contact->position }}</span></a>
+                                                            <button type="button"
+                                                                onclick="window.location.href='{{ $contact->contact_link }}'"
+                                                                class="btn btn-primary" data-toggle="tooltip"
+                                                                data-placement="bottom" title=""
+                                                                data-original-title="{{ $contact->fullname }}">
+                                                                {{ $contact->position }}
+                                                            </button>
                                                         @endforeach
                                                     </div>
                                                 @endif
