@@ -1,79 +1,96 @@
 @extends('layouts.company.company-job')
-@section('title', 'Company')
+@section('title', 'Job')
 
 @push('style')
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
-
 @endpush
 
 @section('main')
+    @include('sweetalert::alert')
 
     <div class="main-content">
         <section class="section">
             <div class="section-header" style="display:flex;justify-content: space-between;}">
-                <h1>Company</h1>
-                <a href="{{ route('company.create') }}" class="btn btn-primary">Add new</a>
+                <h1>Companies</h1>
+                <a href="{{ route('job.create') }}" class="btn btn-primary">Add new</a>
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">Company List</h2>
+                <h2 class="section-title">List</h2>
 
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <select class="form-control selectric" id="page-length-select" class="form-control d-inline-block" style="width: auto;">
+                                <select class="form-control selectric" id="page-length-select"
+                                    class="form-control d-inline-block" style="width: auto;">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                 </select>
+                                <h4></h4>
+                                <div class="card-header-action" style="margin-left: auto">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="customSearchInput"
+                                            placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" id="searchButton">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table-bordered table-md table">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Company Name</th>
-                                            <th>Industry</th>
-                                            <th>Company Size</th>
-                                            <th>Number Of Followers</th>
-                                            <th>Location</th>
-                                            <th>Description</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-
-                                        @foreach ($companies as $company)
+                                    <table id="product_table" class="table-bordered table-md table">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $company->id }} </td>
-                                                <td>{{ $company->company_name }}</td>
-                                                <td>{{ $company->industry }}</td>
-                                                <td>{{ $company->company_size }}</td>
-                                                <td>{{ formatNumber($company->number_of_followers) }}</td>
-                                                <td>{{ $company->location }}</td>
-                                                <td>{{ $company->description }}</td>
-                                                <td><a href="{{ route('company.show', $company->id) }}"
-                                                        class="btn btn-secondary">View</a></td>
-
-                                                <td><a href="{{ route('company.edit', $company->id) }}"
-                                                        class="btn btn-secondary">Edit</a></td>
-                                                <td>
-                                                    <form action="{{ route('company.destroy', $company->id) }}"
-                                                        method="POST" style="display:inline;">
-                                                        @csrf @method('DELETE') <button class="btn btn-secondary"
-                                                            type="submit">Delete</button>
-                                                    </form>
-                                                </td>
-
+                                                <th>ID</th>
+                                                <th>Company Name</th>
+                                                <th>Industry</th>
+                                                <th>Company Size</th>
+                                                <th>Number Of Followers</th>
+                                                <th>Location</th>
+                                                <th>Description</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
-                                        @endforeach
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($companies as $company)
+                                                <tr>
+                                                    <td>{{ $company->id }} </td>
+                                                    <td>{{ $company->company_name }}</td>
+                                                    <td>{{ $company->industry }}</td>
+                                                    <td>{{ $company->company_size }}</td>
+                                                    <td>{{ formatNumber($company->number_of_followers) }}</td>
+                                                    <td>{{ $company->location }}</td>
+                                                    <td>{{ $company->description }}</td>
+                                                    <td><a href="{{ route('company.show', $company->id) }}"
+                                                            class="btn btn-secondary">View</a></td>
+
+                                                    <td><a href="{{ route('company.edit', $company->id) }}"
+                                                            class="btn btn-secondary">Edit</a></td>
+                                                    <td>
+                                                        <form action="{{ route('company.destroy', $company->id) }}"
+                                                            method="POST" style="display:inline;">
+                                                            @csrf @method('DELETE') <button class="btn btn-secondary"
+                                                                type="submit">Delete</button>
+                                                        </form>
+                                                    </td>
+
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
                                     </table>
+
                                 </div>
                             </div>
                             <div class="card-footer text-right">
@@ -143,7 +160,14 @@
                     $('#next-page').removeClass('disabled');
                 }
             }
+            $('#searchButton').on('click', function() {
+                var searchValue = $('#customSearchInput').val();
+                table.search(searchValue).draw();
+            });
 
+            $('#customSearchInput').on('keyup', function(e) {
+                $('#searchButton').click();
+            });
             updateCustomPagination();
 
             $('#custom-pagination').on('click', 'li.page-item:not(#prev-page, #next-page)', function(e) {

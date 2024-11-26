@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\CClassContact\App\Models\CClassContact;
 use Modules\Company\App\Models\Company;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CClassContactController extends Controller
 {
@@ -35,6 +36,8 @@ class CClassContactController extends Controller
     public function store(Request $request): RedirectResponse
     {
         CClassContact::create($request->all());
+
+        Alert::success('Success!', 'CClassContact has been created successfully!');
         return redirect()->route('cclasscontact.index');
     }
 
@@ -66,6 +69,7 @@ class CClassContactController extends Controller
     {
         $contact = CClassContact::findOrFail($id);
         $contact->update($request->all());
+        Alert::success('Success!', 'CClassContact has been updated successfully!');
         return redirect()->route('cclasscontact.index');
     }
 
@@ -76,6 +80,7 @@ class CClassContactController extends Controller
     {
         $contact = CClassContact::findOrFail($id);
         $contact->delete();
+        Alert::success('Success!', 'CClassContact has been deleted successfully!');
         return redirect()->route('cclasscontact.index');
     }
 }

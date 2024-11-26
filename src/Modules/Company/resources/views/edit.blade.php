@@ -23,7 +23,7 @@
                                 <h4>Company Information</h4>
                             </div>
 
-                            <form action="{{ route('company.update', $company->id) }}" method="POST">
+                            <form action="{{ route('company.update', $company->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">

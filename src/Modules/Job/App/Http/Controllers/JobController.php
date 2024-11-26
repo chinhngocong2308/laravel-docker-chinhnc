@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Company\App\Models\Company;
 use Modules\Job\App\Models\Job;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JobController extends Controller
 {
@@ -35,6 +36,7 @@ class JobController extends Controller
     public function store(Request $request): RedirectResponse
     {
         Job::create($request->all());
+        Alert::success('Success!', 'Job has been created successfully!');
         return redirect()->route('job.index');
     }
 
@@ -67,6 +69,8 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($id);
         $job->update($request->all());
+        Alert::success('Success!', 'Job has been updated successfully!');
+
         return redirect()->route('job.index');
     }
 
@@ -77,6 +81,8 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($id);
         $job->delete();
+        Alert::success('Success!', 'Job has been deleted successfully!');
+
         return redirect()->route('job.index');
     }
 }

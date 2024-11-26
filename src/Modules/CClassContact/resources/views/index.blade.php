@@ -5,10 +5,10 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
-
 @endpush
 
 @section('main')
+    @include('sweetalert::alert')
 
     <div class="main-content">
         <section class="section">
@@ -23,14 +23,26 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <select class="form-control selectric" id="page-length-select" class="form-control d-inline-block" style="width: auto;">
+                                <select class="form-control selectric" id="page-length-select"
+                                    class="form-control d-inline-block" style="width: auto;">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                 </select>
+                                <h4></h4>
+                                <div class="card-header-action" style="margin-left: auto">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="customSearchInput"
+                                            placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" id="searchButton">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
 
 
                             <div class="card-body">
@@ -65,8 +77,8 @@
                                                             class="btn btn-secondary">Edit</a>
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('cclasscontact.destroy', $contact->id) }}" method="POST"
-                                                            style="display:inline;">
+                                                        <form action="{{ route('cclasscontact.destroy', $contact->id) }}"
+                                                            method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-secondary" type="submit">Delete</button>
@@ -146,7 +158,14 @@
                     $('#next-page').removeClass('disabled');
                 }
             }
+            $('#searchButton').on('click', function() {
+                var searchValue = $('#customSearchInput').val();
+                table.search(searchValue).draw();
+            });
 
+            $('#customSearchInput').on('keyup', function(e) {
+                $('#searchButton').click();
+            });
             updateCustomPagination();
 
             $('#custom-pagination').on('click', 'li.page-item:not(#prev-page, #next-page)', function(e) {
