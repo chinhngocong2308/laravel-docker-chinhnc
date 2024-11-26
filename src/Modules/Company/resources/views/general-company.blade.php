@@ -46,7 +46,7 @@
                                                                 onclick="window.location.href='{{ $contact->contact_link }}'"
                                                                 class="btn btn-primary" data-toggle="tooltip"
                                                                 data-placement="bottom" title=""
-                                                                data-original-title="{{ $contact->fullname }}">
+                                                                data-original-title="{{ limitString($contact->fullname, 30) }}">
                                                                 {{ $contact->position }}
                                                             </button>
                                                         @endforeach
