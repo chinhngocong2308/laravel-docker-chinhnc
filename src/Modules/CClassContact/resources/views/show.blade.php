@@ -43,10 +43,6 @@
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="form-group mb-0">
-                                        <label for="contact_information">Contact Information</label>
-                                        <textarea name="contact_information" id="contact_information" class="summernote">{{ $contact->contact_information }}</textarea>
-                                    </div>
                                     <div class="form-group">
                                         <label for="company_id">Company</label>
                                         <select class="form-control selectric" name="company_id" id="company_id">
@@ -57,8 +53,11 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="form-group mb-0">
+                                        <label for="contact_information">Contact Information</label>
+                                        <textarea name="contact_information" id="contact_information" class="summernote">{{ $contact->contact_information }}</textarea>
+                                    </div>
                                 </div>
-
                                 <div class="card-footer text-right">
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>

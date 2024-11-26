@@ -60,7 +60,6 @@ class CompanyController extends Controller
             }
         }
         Company::create($request->all());
-        Alert::success('Success!', 'Company has been created successfully!');
 
         return redirect()->route('company.index');
     }
@@ -79,7 +78,6 @@ class CompanyController extends Controller
     public function edit($id)
     {
         $company = Company::findOrFail($id);
-        Alert::success('Success!', 'Company has been edited successfully!');
 
         return view('company::edit', compact('company'));
     }
@@ -105,7 +103,6 @@ class CompanyController extends Controller
         }
         $company = Company::findOrFail($id);
         $company->update($request->all());
-        Alert::success('Success!', 'Company has been updated successfully!');
 
         return redirect()->route('company.index');
     }
@@ -117,7 +114,6 @@ class CompanyController extends Controller
     {
         $company = Company::findOrFail($id);
         $company->delete();
-        Alert::success('Success!', 'Company has been deleted successfully!');
 
         return redirect()->route('company.index');
     }

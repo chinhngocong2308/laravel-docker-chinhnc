@@ -37,7 +37,6 @@ class CClassContactController extends Controller
     {
         CClassContact::create($request->all());
 
-        Alert::success('Success!', 'CClassContact has been created successfully!');
         return redirect()->route('cclasscontact.index');
     }
 
@@ -69,7 +68,6 @@ class CClassContactController extends Controller
     {
         $contact = CClassContact::findOrFail($id);
         $contact->update($request->all());
-        Alert::success('Success!', 'CClassContact has been updated successfully!');
         return redirect()->route('cclasscontact.index');
     }
 
@@ -80,7 +78,6 @@ class CClassContactController extends Controller
     {
         $contact = CClassContact::findOrFail($id);
         $contact->delete();
-        Alert::success('Success!', 'CClassContact has been deleted successfully!');
         return redirect()->route('cclasscontact.index');
     }
 }
