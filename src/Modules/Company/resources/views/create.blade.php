@@ -14,7 +14,9 @@
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">New</h2>
+                <h2><a href="javascript:void(0)" onclick="history.back()" class="btn btn-icon icon-left btn-primary"><i
+                            class="fas fa-chevron-left"></i> Back</a></h2>
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -90,7 +92,7 @@
 
         $.uploadPreview({
             input_field: "#image-upload",
-            preview_box: "#image-preview", 
+            preview_box: "#image-preview",
             label_field: "#image-label",
             label_default: "Choose File",
             label_selected: "Change File",

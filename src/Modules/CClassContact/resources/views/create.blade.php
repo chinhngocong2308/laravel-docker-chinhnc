@@ -3,8 +3,7 @@
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet"
-    href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
 @endpush
@@ -17,7 +16,9 @@
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">New</h2>
+                <h2><a href="javascript:void(0)" onclick="history.back()" class="btn btn-icon icon-left btn-primary"><i
+                            class="fas fa-chevron-left"></i> Back</a></h2>
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">

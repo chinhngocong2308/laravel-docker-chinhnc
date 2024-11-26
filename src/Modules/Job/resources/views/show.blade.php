@@ -3,8 +3,7 @@
 
 @push('style')
     <!-- CSS Libraries -->
-    <link rel="stylesheet"
-    href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
 @endpush
@@ -17,7 +16,9 @@
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">Edit</h2>
+                <h2><a href="javascript:void(0)" onclick="history.back()" class="btn btn-icon icon-left btn-primary"><i
+                            class="fas fa-chevron-left"></i> Back</a></h2>
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -30,42 +31,58 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="job_title">Job Title</label>
-                                        <input type="text" name="job_title" id="job_title" class="form-control" value="{{ $job->job_title }}">
+                                        <input type="text" name="job_title" id="job_title" class="form-control"
+                                            value="{{ $job->job_title }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="company_id">Company</label>
                                         <select class="form-control selectric" name="company_id" id="company_id">
                                             @foreach ($companies as $company)
-                                                <option value="{{ $company->id }}" {{ $company->id == $job->company_id ? 'selected' : '' }}>{{ $company->company_name }}</option>
+                                                <option value="{{ $company->id }}"
+                                                    {{ $company->id == $job->company_id ? 'selected' : '' }}>
+                                                    {{ $company->company_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="job_location">Job Location</label>
-                                        <input type="text" name="job_location" id="job_location" class="form-control" value="{{ $job->job_location }}">
+                                        <input type="text" name="job_location" id="job_location" class="form-control"
+                                            value="{{ $job->job_location }}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="job_type">Job Type</label>
                                         <select class="form-control selectric" name="job_type" id="job_type">
-                                            <option value="onsite" {{ $job->job_type == 'onsite' ? 'selected' : '' }}>Onsite</option>
-                                            <option value="hybrid" {{ $job->job_type == 'hybrid' ? 'selected' : '' }}>Hybrid</option>
-                                            <option value="remote" {{ $job->job_type == 'remote' ? 'selected' : '' }}>Remote</option>
+                                            <option value="onsite" {{ $job->job_type == 'onsite' ? 'selected' : '' }}>Onsite
+                                            </option>
+                                            <option value="hybrid" {{ $job->job_type == 'hybrid' ? 'selected' : '' }}>
+                                                Hybrid</option>
+                                            <option value="remote" {{ $job->job_type == 'remote' ? 'selected' : '' }}>
+                                                Remote</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="employment_type">Employment Type</label>
                                         <select class="form-control selectric" name="employment_type" id="employment_type">
-                                            <option value="full-time" {{ $job->employment_type == 'full-time' ? 'selected' : '' }}>Full-time</option>
-                                            <option value="part-time" {{ $job->employment_type == 'part-time' ? 'selected' : '' }}>Part-time</option>
-                                            <option value="temporary" {{ $job->employment_type == 'temporary' ? 'selected' : '' }}>Temporary</option>
-                                            <option value="contract" {{ $job->employment_type == 'contract' ? 'selected' : '' }}>Contract</option>
+                                            <option value="full-time"
+                                                {{ $job->employment_type == 'full-time' ? 'selected' : '' }}>Full-time
+                                            </option>
+                                            <option value="part-time"
+                                                {{ $job->employment_type == 'part-time' ? 'selected' : '' }}>Part-time
+                                            </option>
+                                            <option value="temporary"
+                                                {{ $job->employment_type == 'temporary' ? 'selected' : '' }}>Temporary
+                                            </option>
+                                            <option value="contract"
+                                                {{ $job->employment_type == 'contract' ? 'selected' : '' }}>Contract
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="open_date">Open Date</label>
-                                        <input type="text" name="open_date" id="open_date" class="form-control datetimepicker" value="{{ $job->open_date }}">
+                                        <input type="text" name="open_date" id="open_date"
+                                            class="form-control datetimepicker" value="{{ $job->open_date }}">
                                     </div>
                                     <div class="form-group mb-0">
                                         <label for="description">Description</label>
