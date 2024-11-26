@@ -14,11 +14,6 @@ use Modules\Company\App\Http\Controllers\CompanyController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('company', CompanyController::class)->names('company');
-});
-
-
 Route::prefix('company-jobs')->group(function() {
     Route::get('/', [
         'as' => 'company.jobs',
@@ -36,4 +31,13 @@ Route::group(['prefix' => 'admin-company'], function() {
     Route::put('/{id}', [CompanyController::class, 'update'])->name('company.update');
     Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
     // Route::post('/company/upload-logo', [CompanyController::class, 'uploadLogo'])->name('company.uploadLogo');
+});
+
+
+Route::get('/general-company-jobs', [CompanyController::class, 'general'])->name('company.general');
+
+
+Route::prefix('company')->name('company.')->group(function () {
+    Route::post('/{id}/follow', [CompanyController::class, 'toggleFollow'])->name('follow');
+    Route::get('/{company}', [CompanyController::class, 'findById'])->name('find');
 });

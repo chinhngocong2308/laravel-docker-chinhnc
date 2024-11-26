@@ -50,8 +50,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label for="contact_information">Contact Information</label>
-                                        <textarea name="contact_information" id="contact_information" class="summernote"></textarea>
+                                        <label for="contact_link">Contact Link</label>
+                                        <input  name="contact_link" id="contact_link" type="url" class="form-control">
                                     </div>
                                 </div>
 

@@ -14,9 +14,6 @@ use Modules\CClassContact\App\Http\Controllers\CClassContactController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('cclasscontact', CClassContactController::class)->names('cclasscontact');
-});
 
 Route::group(['prefix' => 'admin-cclasscontact'], function() {
     Route::get('/', [CClassContactController::class, 'index'])->name('cclasscontact.index');

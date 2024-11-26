@@ -57,8 +57,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label for="contact_information">Contact Information</label>
-                                        <textarea name="contact_information" id="contact_information" class="summernote">{{ $contact->contact_information }}</textarea>
+                                        <label for="contact_link">Contact Information</label>
+                                        <input  name="contact_link" id="contact_link" type="url" class="form-control" value="{{ $contact->contact_link }}">
                                     </div>
                                 </div>
 

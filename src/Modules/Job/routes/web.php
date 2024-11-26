@@ -14,10 +14,6 @@ use Modules\Job\App\Http\Controllers\JobController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('job', JobController::class)->names('job');
-});
-
 Route::group(['prefix' => 'admin-jobs'], function() {
     Route::get('/', [JobController::class, 'index'])->name('job.index');
     Route::get('/create', [JobController::class, 'create'])->name('job.create');

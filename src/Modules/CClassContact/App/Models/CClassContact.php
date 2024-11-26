@@ -18,7 +18,7 @@ class CClassContact extends Model
         'company_id',
         'fullname',
         'position',
-        'contact_information',
+        'contact_link',
     ];
     
     protected static function newFactory(): CClassContactFactory

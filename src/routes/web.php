@@ -17,7 +17,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/test-task', function () {
-    return view('custom_test_task', ['type_menu' => 'modules']);
-});

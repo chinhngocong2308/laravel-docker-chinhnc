@@ -1,0 +1,67 @@
+@extends('layouts.layouts-companies-jobs')
+@section('title', 'Company')
+
+@push('style')
+    <!-- CSS Libraries -->
+@endpush
+
+@section('main')
+    <div class="main-content">
+        <section class="section">
+            <div class="section-body">
+                <p class="section-lead" style="margin-left: 0">About {{ count($companies) }} results</p>
+
+                <div class="row">
+                    <div class="col-12 col-md-9 col-lg-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul id="company-list">
+                                    @foreach ($companies as $company)
+                                        <li class="media company-item" data-id="{{ $company->id }}">
+                                            <img class="mr-3" src="{{ resize($company->logo_image, 50, 50, 0) }}"
+                                                alt="{{ $company->company_name }}">
+                                            <div class="media-body"
+                                                style="border-bottom:1px solid rgb(140 140 140/.2); padding: 12px 0">
+                                                <div style="cursor: pointer;"
+                                                    class="follow-btn badge badge-pill badge-primary float-right">
+                                                    Follow
+                                                </div>
+                                                <h6 class="media-title"><a href="#">{{ $company->company_name }}</a>
+                                                </h6>
+                                                <div class="text-secondary text-muted">
+                                                    <span style="color: rgb(0 0 0 / .9)">{{ $company->industry }} <div
+                                                            class="bullet"></div> {{ $company->location }}</span>
+                                                </div>
+                                                <span>{{ formatNumberFollows($company->number_of_followers) }}</span>
+                                                <p style="font-size: 12px; margin-bottom: 0">
+                                                    {{ limitString($company->description, 241) }}</p>
+                                                @if ($company->jobs()->count() > 0)
+                                                    <a href="#"><i class="fa fa-briefcase"></i>
+                                                        <span>{{ $company->jobs()->count() }} jobs </span></a>
+                                                @endif
+                                                @if ($company->cclasscontact()->count() > 0)
+                                                    <div class="badges">
+                                                        <strong>Contact:</strong>
+                                                        @foreach ($company->cclasscontact as $contact)
+                                                            <a href="{{ $contact->contact_link }}"><span
+                                                                    class="badge badge-primary">{{ $contact->position }}</span></a>
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+@endsection
+@push('scripts')
+    <!-- JS Libraies -->
+
+    <!-- Page Specific JS File -->
+@endpush

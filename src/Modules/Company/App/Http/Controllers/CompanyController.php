@@ -26,7 +26,14 @@ class CompanyController extends Controller
         $companies = Company::all();
         return view('company::index', compact('companies'));
     }
-
+    /**
+     * Display a listing of the resource.
+     */
+    public function general()
+    {
+        $companies = Company::all();
+        return view('company::general-company', compact('companies'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -118,6 +125,26 @@ class CompanyController extends Controller
         return redirect()->route('company.index');
     }
 
+    public function toggleFollow($id)
+    {
+        $company = Company::findOrFail($id);
+    
+        if (request()->action === 'follow') {
+            $company->number_of_followers += 1;
+        } else {
+            $company->number_of_followers -= 1;
+        }
+    
+        $company->save();
+    
+        return response()->json(['number_of_followers' => $company->number_of_followers]);
+    }
+    
+    public function findById(Company $company)
+    {
+        return response()->json($company->load(['jobs', 'cclasscontact']));
+    }
+    
     // public function uploadLogo(Request $request)
     // {
     //     $request->validate([

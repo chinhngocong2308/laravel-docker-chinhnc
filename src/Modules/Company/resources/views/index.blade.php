@@ -14,7 +14,7 @@
         <section class="section">
             <div class="section-header" style="display:flex;justify-content: space-between;}">
                 <h1>Companies</h1>
-                <a href="{{ route('job.create') }}" class="btn btn-primary">Add new</a>
+                <a href="{{ route('company.create') }}" class="btn btn-primary">Add new</a>
             </div>
 
             <div class="section-body">
@@ -24,29 +24,31 @@
                     <div class="col-12 col-md-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <select class="form-control selectric" id="page-length-select"
-                                    class="form-control d-inline-block" style="width: auto;">
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                <h4></h4>
-                                <div class="card-header-action" style="margin-left: auto">
+                                <h5>All Companies</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="float-left">
+                                    <select class="form-control selectric" id="page-length-select"
+                                        class="form-control d-inline-block" style="width: auto;">
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="float-right">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="customSearchInput"
                                             placeholder="Search">
-                                        <div class="input-group-btn">
+                                        <div class="input-group-append">
                                             <button class="btn btn-primary" id="searchButton">
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="clearfix mb-3"></div>
 
-
-                            <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="product_table" class="table-bordered table-md table">
                                         <thead>
@@ -70,7 +72,7 @@
                                                     <td>{{ $company->company_name }}</td>
                                                     <td>{{ $company->industry }}</td>
                                                     <td>{{ $company->company_size }}</td>
-                                                    <td>{{ formatNumber($company->number_of_followers) }}</td>
+                                                    <td>{{ formatNumberFollows($company->number_of_followers) }}</td>
                                                     <td>{{ $company->location }}</td>
                                                     <td>{{ $company->description }}</td>
                                                     <td><a href="{{ route('company.show', $company->id) }}"

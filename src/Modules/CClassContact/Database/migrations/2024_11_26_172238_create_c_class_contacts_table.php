@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             $table->string('fullname');
             $table->set('position', ['CEO', 'CTO', 'CFO']);
-            $table->string('contact_information')->nullable();
+            $table->string('contact_link')->nullable();
             $table->timestamps();
         });
     }

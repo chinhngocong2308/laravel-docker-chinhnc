@@ -24,7 +24,8 @@
                                 <h4>Company Information</h4>
                             </div>
 
-                            <form action="{{ route('company.update', $company->id) }}" method="POST">
+                            <form action="{{ route('company.update', $company->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
@@ -94,13 +95,14 @@
         "use strict";
 
         $.uploadPreview({
-            input_field: "#image-upload", // Default: .image-upload
-            preview_box: "#image-preview", // Default: .image-preview
-            label_field: "#image-label", // Default: .image-label
-            label_default: "Choose File", // Default: Choose File
-            label_selected: "Change File", // Default: Change File
-            no_label: false, // Default: false
-            success_callback: null // Default: null
+            input_field: "#image-upload",
+            preview_box: "#image-preview",
+            label_field: "#image-label",
+            label_default: "Choose File",
+            label_selected: "Change File",
+            no_label: false,
+            success_callback: null
         });
     </script>
+
 @endpush
