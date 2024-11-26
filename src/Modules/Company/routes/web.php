@@ -35,4 +35,5 @@ Route::group(['prefix' => 'admin-company'], function() {
     Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
     Route::put('/{id}', [CompanyController::class, 'update'])->name('company.update');
     Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
+    Route::post('/company/upload-logo', [CompanyController::class, 'uploadLogo'])->name('company.uploadLogo');
 });

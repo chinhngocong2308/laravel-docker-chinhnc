@@ -40,7 +40,8 @@
                                             <th>ID</th>
                                             <th>Company Name</th>
                                             <th>Industry</th>
-                                            <th>Number Of Employee</th>
+                                            <th>Company Size</th>
+                                            <th>Number Of Followers</th>
                                             <th>Location</th>
                                             <th>Description</th>
                                             <th></th>
@@ -53,6 +54,7 @@
                                                 <td>{{ $company->id }} </td>
                                                 <td>{{ $company->company_name }}</td>
                                                 <td>{{ $company->industry }}</td>
+                                                <td>{{ $company->company_size }}</td>
                                                 <td>{{ formatNumber($company->number_of_followers) }}</td>
                                                 <td>{{ $company->location }}</td>
                                                 <td>{{ $company->description }}</td>

@@ -32,6 +32,14 @@
                                         <input type="text" name="company_name" id="company_name" class="form-control" value="{{ $company->company_name }}">
                                     </div>
                                     <div class="form-group">
+                                        <label>Logo</label>
+                                        <div id="image-preview" class="image-preview" style="background-image: url('{{ $company->logo_image ? asset( $company->logo_image) : '' }}'); background-size: cover; background-position: center center;">
+                                            <label for="image-upload" id="image-label">Choose File</label>
+                                            <input type="file" name="logo" id="image-upload" />
+                                        </div>
+                                        <div id="upload-status"></div>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Industry</label>
                                         <input type="text" name="industry" id="industry" class="form-control" value="{{ $company->industry }}">
                                     </div>
@@ -40,7 +48,12 @@
                                         <input type="number" name="number_of_followers" id="number_of_followers"
                                             class="form-control" value="{{ $company->number_of_followers }}">
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>Company Size</label>
+                                        <input type="number" name="company_size" id="company_size"
+                                            class="form-control" value="{{ $company->company_size }}">
+                                    </div>
+                                    
                                     <div class="form-group">
                                         <label>Location</label>
                                         <input type="text" name="location" id="location" class="form-control" value="{{ $company->location }}">
@@ -69,6 +82,20 @@
 
 @push('scripts')
     <!-- JS Libraies -->
+    <script src="{{ asset('library/upload-preview/upload-preview.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script>
+        "use strict";
+
+        $.uploadPreview({
+            input_field: "#image-upload", // Default: .image-upload
+            preview_box: "#image-preview", // Default: .image-preview
+            label_field: "#image-label", // Default: .image-label
+            label_default: "Choose File", // Default: Choose File
+            label_selected: "Change File", // Default: Change File
+            no_label: false, // Default: false
+            success_callback: null // Default: null
+        });
+    </script>
 @endpush

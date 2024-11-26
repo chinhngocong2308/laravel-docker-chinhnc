@@ -21,6 +21,7 @@ create-project:
 	@make fresh
 
 composer-update: 
+	docker compose exec app composer dump-autoload --optimize
 	@make build
 	# @make up
 	docker compose exec app composer update

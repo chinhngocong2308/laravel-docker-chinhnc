@@ -14,6 +14,8 @@ class Company extends Model
     protected $fillable = [
         'company_name',
         'industry',
+        'logo_image',
+        'company_size',
         'number_of_followers',
         'location',
         'description',
