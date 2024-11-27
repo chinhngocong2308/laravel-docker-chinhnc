@@ -28,7 +28,7 @@
                 </ul>
             </li>
 
-            <li class="{{ Request::is('admin-jobs') ? 'active' : '' }}">
+            <li class="{{ Request::is('admin/jobs') ? 'active' : '' }}">
                 <a href="#"
                     class="nav-link has-dropdown"><i class="fas fa-handshake"></i> <span>Jobs</span></a>
 
@@ -41,7 +41,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="{{ Request::is('admin-cclasscontact') ? 'active' : '' }}">
+            <li class="{{ Request::is('admin/cclasscontact') ? 'active' : '' }}">
                 <a href="#"
                     class="nav-link has-dropdown"><i class="fas fa-user-tie"></i> <span>C-Class</span></a>
 

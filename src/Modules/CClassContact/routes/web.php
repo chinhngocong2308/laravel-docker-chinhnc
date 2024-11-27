@@ -15,7 +15,7 @@ use Modules\CClassContact\App\Http\Controllers\CClassContactController;
 */
 
 
-Route::group(['prefix' => 'admin-cclasscontact'], function() {
+Route::group(['prefix' => 'admin/cclasscontact'], function() {
     Route::get('/', [CClassContactController::class, 'index'])->name('cclasscontact.index');
     Route::get('/create', [CClassContactController::class, 'create'])->name('cclasscontact.create');
     Route::post('/', [CClassContactController::class, 'store'])->name('cclasscontact.store');

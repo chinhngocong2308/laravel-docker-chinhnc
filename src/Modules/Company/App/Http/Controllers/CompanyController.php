@@ -42,7 +42,7 @@ class CompanyController extends Controller
     public function general()
     {
         $totalCompanies = Company::count();
-        $companies = Company::with(['jobs', 'cclasscontact'])->paginate(10);
+        $companies = Company::with(['jobs', 'cclasscontact'])->orderBy('id', 'asc')->paginate(10);
 
         return view('company::general-company', compact('companies', 'totalCompanies'));;
     }
