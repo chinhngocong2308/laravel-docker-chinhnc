@@ -22,11 +22,7 @@ create-project:
 
 composer-update: 
 	docker compose exec app composer dump-autoload --optimize
-	@make build
-	# @make up
 	docker compose exec app composer update
-	docker compose exec app php artisan migrate
-	@make fresh
 
 grant-permission:
 	docker compose exec app chmod -R 777 storage bootstrap/cache
@@ -107,3 +103,7 @@ artisan-serve:
 	docker compose exec app php artisan view:clear
 	docker compose exec app php artisan route:clear
 	docker compose exec app php artisan serve
+
+seed-logo-image:
+	mkdir -p src/storage/app/public/company/logos
+	cp -r src/public/img/logo_company/* src/storage/app/public/company/logos/
