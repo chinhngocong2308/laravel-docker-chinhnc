@@ -1,4 +1,4 @@
-@extends('layouts.layouts-companies-jobs')
+@extends('layouts.view-companies-jobs')
 @section('title', 'Company')
 
 @push('style')
