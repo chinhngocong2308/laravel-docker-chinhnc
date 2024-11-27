@@ -10,7 +10,9 @@ install:
 	docker compose exec app php artisan storage:link
 	docker compose exec app chmod -R 777 storage bootstrap/cache
 	@make migrate
-	@make fresh
+	# @make fresh
+	@make seed
+	@make seed-logo-image
 create-project:
 	mkdir src
 	docker compose build
