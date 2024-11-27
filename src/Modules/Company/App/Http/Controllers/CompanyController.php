@@ -34,7 +34,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return view('company::index', compact('companies'));
+        return view('company::admin.index', compact('companies'));
     }
     /**
      * Display a listing of the resource.
@@ -52,7 +52,7 @@ class CompanyController extends Controller
     public function create()
     {
         $type_menu = 'dashboard';
-        return view('company::create', compact('type_menu'));
+        return view('company::admin.create', compact('type_menu'));
     }
 
     /**
@@ -88,7 +88,7 @@ class CompanyController extends Controller
     public function show($id)
     {
         $company = Company::findOrFail($id);
-        return view('company::show', compact('company'));
+        return view('company::admin.show', compact('company'));
     }
 
     /**
@@ -98,7 +98,7 @@ class CompanyController extends Controller
     {
         $company = Company::findOrFail($id);
 
-        return view('company::edit', compact('company'));
+        return view('company::admin.edit', compact('company'));
     }
 
     /**
@@ -137,33 +137,24 @@ class CompanyController extends Controller
         return redirect()->route('company.index');
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function toggleFollow($id)
-    {
-        $company = Company::findOrFail($id);
+    // /**
+    //  * @param $id
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function toggleFollow($id)
+    // {
+    //     $company = Company::findOrFail($id);
 
-        if (request()->action === 'follow') {
-            $company->number_of_followers += 1;
-        } else {
-            $company->number_of_followers -= 1;
-        }
+    //     if (request()->action === 'follow') {
+    //         $company->number_of_followers += 1;
+    //     } else {
+    //         $company->number_of_followers -= 1;
+    //     }
 
-        $company->save();
+    //     $company->save();
 
-        return response()->json(['number_of_followers' => $company->number_of_followers]);
-    }
-
-    /**
-     * @param \Modules\Company\App\Models\Company $company
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function findById(Company $company)
-    {
-        return response()->json($company->load(['jobs', 'cclasscontact']));
-    }
+    //     return response()->json(['number_of_followers' => $company->number_of_followers]);
+    // }
 
     // public function uploadLogo(Request $request)
     // {

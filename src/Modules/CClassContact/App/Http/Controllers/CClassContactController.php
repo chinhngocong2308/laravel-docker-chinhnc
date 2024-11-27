@@ -20,7 +20,7 @@ class CClassContactController extends Controller
     public function index()
     {
         $contacts = CClassContact::with('company')->get();
-        return view('cclasscontact::index', compact('contacts'));
+        return view('cclasscontact::admin.index', compact('contacts'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CClassContactController extends Controller
     public function create()
     {
         $companies = Company::all();
-        return view('cclasscontact::create', compact('companies'));
+        return view('cclasscontact::admin.create', compact('companies'));
     }
 
     /**
@@ -49,7 +49,7 @@ class CClassContactController extends Controller
         $companies = Company::all();
 
         $contact = CClassContact::with('company')->findOrFail($id);
-        return view('cclasscontact::show', compact('contact', 'companies'));
+        return view('cclasscontact::admin.show', compact('contact', 'companies'));
     }
 
     /**
@@ -59,7 +59,7 @@ class CClassContactController extends Controller
     {
         $contact = CClassContact::findOrFail($id);
         $companies = Company::all();
-        return view('cclasscontact::edit', compact('contact', 'companies'));
+        return view('cclasscontact::admin.edit', compact('contact', 'companies'));
     }
 
     /**

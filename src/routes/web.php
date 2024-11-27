@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Company\App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/', [CompanyController::class, 'general'])->name('company.general');

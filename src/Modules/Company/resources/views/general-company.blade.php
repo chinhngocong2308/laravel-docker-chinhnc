@@ -36,7 +36,7 @@
                                                 <p style="font-size: 12px; margin-bottom: 0">
                                                     {{ limitString($company->description, 241) }}</p>
                                                 @if ($company->jobs()->count() > 0)
-                                                    <a href="#"><i class="fa fa-briefcase"></i>
+                                                    <a href="{{ route('job.search') }}?company_id={{ $company->id }}"><i class="fa fa-briefcase"></i>
                                                         <span>{{ $company->jobs()->count() }} jobs </span></a>
                                                 @endif
                                                 @if ($company->cclasscontact()->count() > 0)
@@ -58,7 +58,7 @@
                                 </ul>
                             </div>
                             <div class="pagination" style="margin: 0 auto;">
-                                {{ $companies->links('vendor.pagination.general-companies-pagination') }}
+                                {{ $companies->links('vendor.pagination.general-companies-jobs') }}
                             </div>
                         </div>
                     </div>

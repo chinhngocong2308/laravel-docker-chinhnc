@@ -34,10 +34,10 @@ Route::group(['prefix' => 'admin/company'], function() {
 });
 
 
+// Route::prefix('company')->name('company.')->group(function () {
+//     Route::post('/{id}/follow', [CompanyController::class, 'toggleFollow'])->name('follow');
+//     Route::get('/{company}', [CompanyController::class, 'findById'])->name('find');
+// });
+
+
 Route::get('/general-company-jobs', [CompanyController::class, 'general'])->name('company.general');
-
-
-Route::prefix('company')->name('company.')->group(function () {
-    Route::post('/{id}/follow', [CompanyController::class, 'toggleFollow'])->name('follow');
-    Route::get('/{company}', [CompanyController::class, 'findById'])->name('find');
-});

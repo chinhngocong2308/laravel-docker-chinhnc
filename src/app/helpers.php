@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 if (!function_exists('formatNumberFollows')) {
     function formatNumberFollows($number)
     {
@@ -18,6 +20,17 @@ if (!function_exists('limitString')) {
         return $string;
     }
 }
+
+if (!function_exists('formatOpenDate')) {
+    function formatOpenDate($date)
+    {
+        $carbonDate = Carbon::createFromFormat('Y-m-d', $date);
+        $formattedDate = $carbonDate->diffForHumans();
+
+        return $formattedDate;
+    }
+}
+
 if (!function_exists('resize')) {
     function resize($file, $width, $height, $type = "")
     {

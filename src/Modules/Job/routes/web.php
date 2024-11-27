@@ -23,3 +23,10 @@ Route::group(['prefix' => 'admin/jobs'], function() {
     Route::put('/{id}', [JobController::class, 'update'])->name('job.update');
     Route::delete('/{id}', [JobController::class, 'destroy'])->name('job.destroy');
 });
+
+Route::get('/jobs/search', [JobController::class, 'search'])->name('job.search');
+
+Route::prefix('jobs')->name('jobs.')->group(function () {
+    Route::get('/{id}', [JobController::class, 'findById'])->name('find');
+});
+

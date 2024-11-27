@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Company\App\Models\Company;
 use Modules\Job\App\Models\Job;
-use RealRashid\SweetAlert\Facades\Alert;
 
 /**
  * Class JobController
@@ -22,7 +21,46 @@ class JobController extends Controller
     public function index()
     {
         $jobs = Job::all();
-        return view('job::index', compact('jobs'));
+        return view('job::admin.index', compact('jobs'));
+    }
+
+    /**
+     * @param  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function findById($id)
+    {
+        $job = Job::with('company')->find($id);
+
+        if (!$job) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Job not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $job
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function search(Request $request)
+    {
+        $companyID = $request->input('company_id');
+        if($companyID) {
+            $jobsCondition = Job::with(['company'])->where('company_id', $companyID);
+            $totalJobs = $jobsCondition->get()->count();
+            $jobs = $jobsCondition->orderBy('id', 'asc')->paginate(10);
+        } else {
+            $totalJobs = Job::count();
+            $jobs = Job::with(['company'])->orderBy('id', 'asc')->paginate(10);
+        }
+
+        return view('job::jobs-search', compact('jobs', 'totalJobs'));
     }
 
     /**
@@ -31,7 +69,7 @@ class JobController extends Controller
     public function create()
     {
         $companies = Company::all();
-        return view('job::create', compact('companies'));
+        return view('job::admin.create', compact('companies'));
     }
 
     /**
@@ -64,7 +102,7 @@ class JobController extends Controller
         $job = Job::findOrFail($id);
         $companies = Company::all();
 
-        return view('job::show', compact('job', 'companies'));
+        return view('job::admin.show', compact('job', 'companies'));
     }
 
     /**
@@ -74,7 +112,7 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($id);
         $companies = Company::all();
-        return view('job::edit', compact('job', 'companies'));
+        return view('job::admin.edit', compact('job', 'companies'));
     }
 
 
