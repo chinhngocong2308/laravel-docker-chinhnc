@@ -23,7 +23,7 @@ $ make seed-logo-image
 ```
 Test task: http://localhost 
 <p align="center">
-  <img alt="Companies view" src="./_readme/company-views.png>
+  <img alt="Companies view" src="./_readme/company-views.png">
 </p>
 <p align="center">
   <img alt="Jobs view" src="./_readme/job-views.png">
