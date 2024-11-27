@@ -63,9 +63,9 @@ fresh:
 	docker compose exec app php artisan migrate:fresh --seed
 seed:
 	docker compose exec app php artisan db:seed
-	docker compose exec app php artisan db:seed --class=Modules\\CClassContact\\Database\\Seeders\\CClassContactDatabaseSeeder
-	docker compose exec app php artisan db:seed --class=Modules\\Company\\Database\\Seeders\\CompanyDatabaseSeeder
-	docker compose exec app php artisan db:seed --class=Modules\\Job\\Database\\Seeders\\JobDatabaseSeeder
+	# docker compose exec app php artisan db:seed --class=Modules\\CClassContact\\Database\\Seeders\\CClassContactDatabaseSeeder
+	# docker compose exec app php artisan db:seed --class=Modules\\Company\\Database\\Seeders\\CompanyDatabaseSeeder
+	# docker compose exec app php artisan db:seed --class=Modules\\Job\\Database\\Seeders\\JobDatabaseSeeder
 dacapo:
 	docker compose exec app php artisan dacapo
 rollback-test:
