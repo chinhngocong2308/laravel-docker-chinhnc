@@ -17,6 +17,7 @@ class CompanyDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement('SET foreign_key_checks = 0;');
         if (DB::table('companies')->count() === 0) {
             DB::table('companies')->insert([
                 [
@@ -303,6 +304,8 @@ class CompanyDatabaseSeeder extends Seeder
                 ],
             ]);
         }
+        DB::statement('SET foreign_key_checks = 1;');
+
     }
 
     /**

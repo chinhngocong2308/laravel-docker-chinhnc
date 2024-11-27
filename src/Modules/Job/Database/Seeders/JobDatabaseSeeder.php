@@ -12,6 +12,7 @@ class JobDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement('SET foreign_key_checks = 0;');
         if (DB::table('jobs')->count() === 0) {
 
             DB::table('jobs')->insert([
@@ -1343,5 +1344,6 @@ class JobDatabaseSeeder extends Seeder
                 ],
             ]);
         }
+        DB::statement('SET foreign_key_checks = 1;');
     }
 }
