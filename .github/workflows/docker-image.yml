@@ -47,20 +47,3 @@ jobs:
     - name: Show logs for db container if it fails
       if: failure()
       run: docker logs db
-
-    # Cài đặt ngrok
-    - name: Install ngrok
-      run: |
-        curl -s https://ngrok.com/download | tar xz -C /usr/local/bin
-
-    # Chạy ngrok
-    - name: Expose the app using ngrok
-      run: |
-        nohup ngrok http 80 &
-
-    # Chờ ngrok khởi động và lấy URL
-    - name: Get the ngrok URL
-      run: |
-        sleep 10
-        curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
-
