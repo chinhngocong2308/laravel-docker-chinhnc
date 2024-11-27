@@ -9,6 +9,9 @@ services:
             - 5173:5173
         volumes:
             - ./src:/var/www
+        depends_on:
+            db:
+                condition: service_healthy
         networks:
             - laravel_network
 
@@ -49,6 +52,11 @@ services:
         user: mysql
         networks:
             - laravel_network
+        healthcheck:
+                test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+                interval: 10s
+                timeout: 5s
+                retries: 5
 
     ####################################################################################################
     # phpMyAdmin
