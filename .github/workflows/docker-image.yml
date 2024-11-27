@@ -28,8 +28,6 @@ jobs:
 
     - name: Run make install
       run: |
-        export DOCKER_CLIENT_TIMEOUT=300
-        export COMPOSE_HTTP_TIMEOUT=300
         make install
 
     - name: Run make seed
