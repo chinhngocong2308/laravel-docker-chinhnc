@@ -5,10 +5,20 @@ namespace Modules\CClassContact\App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class CClassContactServiceProvider
+ * @package Modules\CClassContact\App\Providers
+ */
 class CClassContactServiceProvider extends ServiceProvider
 {
+    /**
+     * @var string
+     */
     protected string $moduleName = 'CClassContact';
 
+    /**
+     * @var string
+     */
     protected string $moduleNameLower = 'cclasscontact';
 
     /**
@@ -100,6 +110,9 @@ class CClassContactServiceProvider extends ServiceProvider
         return [];
     }
 
+    /**
+     * @return array
+     */
     private function getPublishableViewPaths(): array
     {
         $paths = [];

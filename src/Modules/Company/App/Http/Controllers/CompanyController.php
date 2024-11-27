@@ -10,10 +10,20 @@ use Modules\Company\App\Models\Company;
 use Modules\Company\App\Services\ImageUploadService;
 use RealRashid\SweetAlert\Facades\Alert;
 
+/**
+ * Class CompanyController
+ * @package Modules\Company\App\Http\Controllers
+ */
 class CompanyController extends Controller
 {
+    /**
+     * @var \Modules\Company\App\Services\ImageUploadService
+     */
     protected $imageUploadService;
 
+    /**
+     * @param \Modules\Company\App\Services\ImageUploadService $imageUploadService
+     */
     public function __construct(ImageUploadService $imageUploadService)
     {
         $this->imageUploadService = $imageUploadService;
@@ -31,8 +41,10 @@ class CompanyController extends Controller
      */
     public function general()
     {
-        $companies = Company::all();
-        return view('company::general-company', compact('companies'));
+        $totalCompanies = Company::count();
+        $companies = Company::with(['jobs', 'cclasscontact'])->paginate(10);
+
+        return view('company::general-company', compact('companies', 'totalCompanies'));;
     }
     /**
      * Show the form for creating a new resource.
@@ -54,7 +66,7 @@ class CompanyController extends Controller
 
         if ($request->hasFile('logo')) {
             $image = $request->file('logo');
-    
+
             if ($image->isValid()) {
                 $imagePath = $this->imageUploadService->uploadLogo($image);
                 if ($imagePath) {
@@ -96,7 +108,7 @@ class CompanyController extends Controller
     {
         if ($request->hasFile('logo')) {
             $image = $request->file('logo');
-    
+
             if ($image->isValid()) {
                 $imagePath = $this->imageUploadService->uploadLogo($image);
                 if ($imagePath) {
@@ -125,26 +137,34 @@ class CompanyController extends Controller
         return redirect()->route('company.index');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function toggleFollow($id)
     {
         $company = Company::findOrFail($id);
-    
+
         if (request()->action === 'follow') {
             $company->number_of_followers += 1;
         } else {
             $company->number_of_followers -= 1;
         }
-    
+
         $company->save();
-    
+
         return response()->json(['number_of_followers' => $company->number_of_followers]);
     }
-    
+
+    /**
+     * @param \Modules\Company\App\Models\Company $company
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function findById(Company $company)
     {
         return response()->json($company->load(['jobs', 'cclasscontact']));
     }
-    
+
     // public function uploadLogo(Request $request)
     // {
     //     $request->validate([

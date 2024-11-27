@@ -5,11 +5,13 @@ namespace Modules\CClassContact\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Modules\CClassContact\App\Models\CClassContact;
 use Modules\Company\App\Models\Company;
-use RealRashid\SweetAlert\Facades\Alert;
 
+/**
+ * Class CClassContactController
+ * @package Modules\CClassContact\App\Http\Controllers
+ */
 class CClassContactController extends Controller
 {
     /**
@@ -36,7 +38,6 @@ class CClassContactController extends Controller
     public function store(Request $request): RedirectResponse
     {
         CClassContact::create($request->all());
-
         return redirect()->route('cclasscontact.index');
     }
 

@@ -9,7 +9,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-body">
-                <p class="section-lead" style="margin-left: 0">About {{ count($companies) }} results</p>
+                <p class="section-lead" style="margin-left: 0">About {{ $totalCompanies }} results</p>
 
                 <div class="row">
                     <div class="col-12 col-md-9 col-lg-9">
@@ -57,8 +57,13 @@
                                     @endforeach
                                 </ul>
                             </div>
+                            <div class="pagination" style="margin: 0 auto;">
+                                {{ $companies->links('vendor.pagination.general-companies-pagination') }}
+                            </div>
                         </div>
                     </div>
+                    <!-- Thêm nút phân trang -->
+
                 </div>
             </div>
         </section>

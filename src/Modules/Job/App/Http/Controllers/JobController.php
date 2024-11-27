@@ -10,6 +10,10 @@ use Modules\Company\App\Models\Company;
 use Modules\Job\App\Models\Job;
 use RealRashid\SweetAlert\Facades\Alert;
 
+/**
+ * Class JobController
+ * @package Modules\Job\App\Http\Controllers
+ */
 class JobController extends Controller
 {
     /**
@@ -35,8 +39,21 @@ class JobController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        Job::create($request->all());
-        return redirect()->route('job.index');
+        $employmentTypes = $request->input('employment_type', []);
+        $jobTypes = $request->input('job_type', []);
+
+        $employmentTypesString = implode(',', $employmentTypes);
+        $jobTypesString = implode(',', $jobTypes);
+
+        Job::create(array_merge(
+            $request->except(['employment_type', 'job_type']),
+            [
+                'employment_type' => $employmentTypesString,
+                'job_type' => $jobTypesString,
+            ]
+        ));
+
+        return redirect()->route('job.index')->with('success', 'Job created successfully!');
     }
 
     /**
@@ -67,9 +84,22 @@ class JobController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $job = Job::findOrFail($id);
-        $job->update($request->all());
 
-        return redirect()->route('job.index');
+        $employmentTypes = $request->input('employment_type', []);
+        $jobTypes = $request->input('job_type', []);
+
+        $employmentTypesString = implode(',', $employmentTypes);
+        $jobTypesString = implode(',', $jobTypes);
+
+        $job->update(array_merge(
+            $request->except(['employment_type', 'job_type']),
+            [
+                'employment_type' => $employmentTypesString,
+                'job_type' => $jobTypesString,
+            ]
+        ));
+
+        return redirect()->route('job.index')->with('success', 'Job updated successfully!');
     }
 
     /**

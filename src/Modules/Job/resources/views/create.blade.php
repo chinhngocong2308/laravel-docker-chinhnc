@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
 @endpush
 @section('main')
 
@@ -34,8 +35,9 @@
                                         <input type="text" name="job_title" id="job_title" class="form-control">
                                     </div>
                                     <div class="form-group">
+
                                         <label for="company_id">Company</label>
-                                        <select class="form-control selectric" name="company_id" id="company_id">
+                                        <select class="form-control select2" name="company_id">
                                             @foreach ($companies as $company)
                                                 <option value="{{ $company->id }}">{{ $company->company_name }}</option>
                                             @endforeach
@@ -48,7 +50,7 @@
 
                                     <div class="form-group">
                                         <label for="job_type">Job Type</label>
-                                        <select class="form-control selectric" name="job_type" id="job_type">
+                                        <select class="form-control select2" name="job_type[]" id="job_type" multiple="">
                                             <option value="onsite">Onsite</option>
                                             <option value="hybrid">Hybrid</option>
                                             <option value="remote">Remote</option>
@@ -57,7 +59,7 @@
 
                                     <div class="form-group">
                                         <label for="employment_type">Employment Type</label>
-                                        <select class="form-control selectric" name="employment_type" id="employment_type">
+                                        <select class="form-control select2" name="employment_type[]" id="employment_type" multiple="">
                                             <option value="full-time">Full-time</option>
                                             <option value="part-time">Part-time</option>
                                             <option value="temporary">Temporary</option>
@@ -103,6 +105,7 @@
     <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
     <script src="{{ asset('library/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
 @endpush

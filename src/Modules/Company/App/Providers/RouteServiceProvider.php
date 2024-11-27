@@ -5,6 +5,10 @@ namespace Modules\Company\App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+/**
+ * Class RouteServiceProvider
+ * @package Modules\Company\App\Providers
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /**

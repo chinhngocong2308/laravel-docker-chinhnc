@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
+
 @endpush
 @section('main')
 
@@ -47,13 +49,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="company_id">Company</label>
-                                        <select class="form-control selectric" name="company_id" id="company_id">
+
+                                        <select class="form-control select2">
                                             @foreach ($companies as $company)
                                                 <option value="{{ $company->id }}"
                                                     {{ $company->id == $contact->company_id ? 'selected' : '' }}>
                                                     {{ $company->company_name }}</option>
                                             @endforeach
                                         </select>
+
                                     </div>
                                     <div class="form-group mb-0">
                                         <label for="contact_link">Contact Link</label>
@@ -80,6 +84,7 @@
     <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
     <script src="{{ asset('library/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
 @endpush

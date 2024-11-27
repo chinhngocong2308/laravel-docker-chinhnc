@@ -5,6 +5,10 @@ namespace Modules\CClassContact\App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+/**
+ * Class RouteServiceProvider
+ * @package Modules\CClassContact\App\Providers
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /**

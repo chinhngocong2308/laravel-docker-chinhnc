@@ -5,10 +5,20 @@ namespace Modules\Company\App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class CompanyServiceProvider
+ * @package Modules\Company\App\Providers
+ */
 class CompanyServiceProvider extends ServiceProvider
 {
+    /**
+     * @var string
+     */
     protected string $moduleName = 'Company';
 
+    /**
+     * @var string
+     */
     protected string $moduleNameLower = 'company';
 
     /**
@@ -100,6 +110,9 @@ class CompanyServiceProvider extends ServiceProvider
         return [];
     }
 
+    /**
+     * @return array
+     */
     private function getPublishableViewPaths(): array
     {
         $paths = [];

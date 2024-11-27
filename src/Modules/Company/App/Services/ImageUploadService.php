@@ -4,8 +4,16 @@ namespace Modules\Company\App\Services;
 
 use Illuminate\Http\UploadedFile;
 
+/**
+ * Class ImageUploadService
+ * @package Modules\Company\App\Services
+ */
 class ImageUploadService
 {
+    /**
+     * @param \Illuminate\Http\UploadedFile $image
+     * @return string|null
+     */
     public function uploadLogo(UploadedFile $image)
     {
         $filename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);

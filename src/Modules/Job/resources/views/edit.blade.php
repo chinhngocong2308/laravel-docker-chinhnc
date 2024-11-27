@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
 @endpush
 @section('main')
 
@@ -36,13 +37,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="company_id">Company</label>
-                                        <select class="form-control selectric" name="company_id" id="company_id">
+
+                                        <select class="form-control select2">
                                             @foreach ($companies as $company)
                                                 <option value="{{ $company->id }}"
                                                     {{ $company->id == $job->company_id ? 'selected' : '' }}>
                                                     {{ $company->company_name }}</option>
                                             @endforeach
                                         </select>
+
                                     </div>
                                     <div class="form-group">
                                         <label for="job_location">Job Location</label>
@@ -52,30 +55,27 @@
 
                                     <div class="form-group">
                                         <label for="job_type">Job Type</label>
-                                        <select class="form-control selectric" name="job_type" id="job_type">
-                                            <option value="onsite" {{ $job->job_type == 'onsite' ? 'selected' : '' }}>Onsite
-                                            </option>
-                                            <option value="hybrid" {{ $job->job_type == 'hybrid' ? 'selected' : '' }}>
-                                                Hybrid</option>
-                                            <option value="remote" {{ $job->job_type == 'remote' ? 'selected' : '' }}>
-                                                Remote</option>
+                                        <select class="form-control select2" name="job_type[]" id="job_type" multiple>
+                                            <option value="onsite" {{ in_array('onsite', explode(',', $job->job_type)) ? 'selected' : '' }}>Onsite</option>
+                                            <option value="hybrid" {{ in_array('hybrid', explode(',', $job->job_type)) ? 'selected' : '' }}>Hybrid</option>
+                                            <option value="remote" {{ in_array('remote', explode(',', $job->job_type)) ? 'selected' : '' }}>Remote</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="employment_type">Employment Type</label>
-                                        <select class="form-control selectric" name="employment_type" id="employment_type">
-                                            <option value="full-time"
-                                                {{ $job->employment_type == 'full-time' ? 'selected' : '' }}>Full-time
+                                        <select class="form-control select2" name="employment_type[]" id="employment_type" multiple>
+                                            <option value="full-time" {{ in_array('full-time', explode(',', $job->employment_type)) ? 'selected' : '' }}>
+                                                Full-time
                                             </option>
-                                            <option value="part-time"
-                                                {{ $job->employment_type == 'part-time' ? 'selected' : '' }}>Part-time
+                                            <option value="part-time" {{ in_array('part-time', explode(',', $job->employment_type)) ? 'selected' : '' }}>
+                                                Part-time
                                             </option>
-                                            <option value="temporary"
-                                                {{ $job->employment_type == 'temporary' ? 'selected' : '' }}>Temporary
+                                            <option value="temporary" {{ in_array('temporary', explode(',', $job->employment_type)) ? 'selected' : '' }}>
+                                                Temporary
                                             </option>
-                                            <option value="contract"
-                                                {{ $job->employment_type == 'contract' ? 'selected' : '' }}>Contract
+                                            <option value="contract" {{ in_array('contract', explode(',', $job->employment_type)) ? 'selected' : '' }}>
+                                                Contract
                                             </option>
                                         </select>
                                     </div>
@@ -118,6 +118,7 @@
     <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
     <script src="{{ asset('library/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
 @endpush

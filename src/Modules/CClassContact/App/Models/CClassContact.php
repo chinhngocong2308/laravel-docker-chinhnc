@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\CClassContact\Database\factories\CClassContactFactory;
 use Modules\Company\App\Models\Company;
 
+/**
+ * Class CClassContact
+ * @package Modules\CClassContact\App\Models
+ */
 class CClassContact extends Model
 {
     use HasFactory;
@@ -20,7 +24,7 @@ class CClassContact extends Model
         'position',
         'contact_link',
     ];
-    
+
     protected static function newFactory(): CClassContactFactory
     {
         //return CClassContactFactory::new();

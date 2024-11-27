@@ -8,10 +8,17 @@ use Modules\Company\Database\factories\CompanyFactory;
 use Modules\Job\App\Models\Job;
 use Modules\CClassContact\App\Models\CClassContact;
 
+/**
+ * Class Company
+ * @package Modules\Company\App\Models
+ */
 class Company extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'company_name',
         'industry',
@@ -22,11 +29,17 @@ class Company extends Model
         'description',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function jobs()
     {
         return $this->hasMany(Job::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function cclasscontact()
     {
         return $this->hasMany(CClassContact::class);
