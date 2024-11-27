@@ -22,13 +22,9 @@ jobs:
     - name: Set up Docker
       uses: docker/setup-qemu-action@v2
 
-    - name: Start Docker Compose services
+    - name: Retry Docker image pull
       run: |
-        docker-compose up -d --no-cache
-
-    - name: Wait for MySQL to be ready
-      run: |
-        sleep 5  # Đợi 30 giây để đảm bảo MySQL sẵn sàng trước khi ứng dụng kết nối
+        until docker pull nginx; do echo "Retrying..."; sleep 10; done
 
     - name: Run make install
       run: |
