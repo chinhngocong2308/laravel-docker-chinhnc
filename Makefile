@@ -11,7 +11,6 @@ install:
 	docker compose exec app chmod -R 777 storage bootstrap/cache
 	@make migrate
 	@make fresh
-	@make seed
 create-project:
 	mkdir src
 	docker compose build
