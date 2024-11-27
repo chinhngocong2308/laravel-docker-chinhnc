@@ -26,9 +26,9 @@ jobs:
       run: |
         until docker pull nginx; do echo "Retrying..."; sleep 10; done
 
-    - name: Run make up
+    - name: Run make install
       run: |
-        make up
+        make install
 
     # - name: Run make seed
     #   run: |
