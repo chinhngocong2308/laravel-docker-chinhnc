@@ -14,7 +14,7 @@
             </li>
             <li class="menu-header">Starter</li>
 
-            <li class="{{ Request::is('company-jobs') ? 'active' : '' }}">
+            <li class="{{ Request::is('admin/company') ? 'active' : '' }}">
                 <a href="#"
                     class="nav-link has-dropdown"><i class="far fa-building"></i> <span>Companies</span></a>
 

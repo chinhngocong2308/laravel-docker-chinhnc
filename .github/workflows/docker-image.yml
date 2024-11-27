@@ -30,9 +30,9 @@ jobs:
       run: |
         make install
 
-    - name: Run make seed
-      run: |
-        make seed
+    # - name: Run make seed
+    #   run: |
+    #     make seed
 
     - name: Run make seed-logo-image
       run: |

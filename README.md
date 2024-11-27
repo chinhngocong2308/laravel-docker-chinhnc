@@ -22,5 +22,15 @@ $ make seed-logo-image
 
 ```
 Test task: http://localhost 
+<p align="center">
+  <img alt="Companies view" src="https://ibb.co/nDm3XXw">
+</p>
+<p align="center">
+  <img alt="Jobs view" src="https://ibb.co/18DLyMY
+  ">
+</p>
 
 Admin test task: http://localhost/admin/company
+<p align="center">
+  <img alt="Companies admin" src="https://ibb.co/JC8X2gk">
+</p>
