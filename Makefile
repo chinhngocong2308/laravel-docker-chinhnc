@@ -3,7 +3,7 @@ for-linux-env:
 	echo "GID=$$(id -g)" >> .env
 install:
 	@make build
-	# @make up
+	@make up
 	docker compose exec app composer install
 	docker compose exec app cp .env.example .env
 	docker compose exec app php artisan key:generate
